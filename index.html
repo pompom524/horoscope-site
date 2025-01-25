@@ -7,8 +7,8 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #fcefee; /* 明るいピンク背景 */
-      color: #333333; /* 読みやすい濃い文字色 */
+      background-color: #fcefee;
+      color: #333333;
       text-align: center;
       margin: 0;
       padding: 0;
@@ -16,20 +16,20 @@
     h1 {
       margin-top: 20px;
       font-size: 2.5em;
-      color: #ff6f61; /* ポップな赤系 */
+      color: #ff6f61;
     }
     .container {
       margin: 20px auto;
       max-width: 600px;
       padding: 20px;
-      background-color: #ffffff; /* 白いカード風の背景 */
-      border-radius: 15px; /* 角を丸く */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 柔らかい影 */
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     button {
       margin: 10px;
       padding: 10px 20px;
-      background-color: #ffb347; /* 明るいオレンジ */
+      background-color: #ffb347;
       color: white;
       border: none;
       border-radius: 5px;
@@ -38,38 +38,68 @@
       transition: background-color 0.3s;
     }
     button:hover {
-      background-color: #ffcc66; /* 少し明るく変化 */
+      background-color: #ffcc66;
     }
     #result {
       margin-top: 20px;
-      color: #555555; /* 落ち着いた文字色 */
+      color: #555555;
+    }
+    .ranking {
+      margin-top: 30px;
+    }
+    .ranking h3 {
+      color: #ff6f61;
     }
   </style>
 </head>
 <body>
-  <h1>星座占い</h1>
+  <h1>誕生月と星座占い</h1>
   <div class="container">
-    <p>あなたの星座を選んでください:</p>
-    <button onclick="showResult('おひつじ座')">おひつじ座</button>
-    <button onclick="showResult('おうし座')">おうし座</button>
-    <button onclick="showResult('ふたご座')">ふたご座</button>
-    <!-- 必要に応じて他の星座も追加 -->
+    <p>あなたの誕生月を選んでください:</p>
+    <button onclick="showRanking('1')">1月</button>
+    <button onclick="showRanking('2')">2月</button>
+    <button onclick="showRanking('3')">3月</button>
+    <button onclick="showRanking('4')">4月</button>
+    <button onclick="showRanking('5')">5月</button>
+    <button onclick="showRanking('6')">6月</button>
+    <button onclick="showRanking('7')">7月</button>
+    <button onclick="showRanking('8')">8月</button>
+    <button onclick="showRanking('9')">9月</button>
+    <button onclick="showRanking('10')">10月</button>
+    <button onclick="showRanking('11')">11月</button>
+    <button onclick="showRanking('12')">12月</button>
+
     <div id="result"></div>
   </div>
 
   <script>
-    function showResult(sign) {
-      const messages = {
-        "おひつじ座": "今日は元気いっぱい！新しい挑戦にぴったりの日。",
-        "おうし座": "穏やかな一日。大切な人との時間を楽しんで。",
-        "ふたご座": "好奇心を満たすチャンス到来！外に出てみては？"
-        // 他の星座のメッセージを追加
+    function showRanking(month) {
+      const rankings = {
+        "1": {
+          rank: ["おひつじ座", "おうし座", "ふたご座", "かに座", "しし座"],
+          description: "1月生まれのあなたは、情熱的で活動的な性格。周りを引っ張る力を持っていて、常に新しい挑戦を求めています。",
+          goodAdvice: "今日は新しいことに挑戦してみてください！思いがけない成功を収めるかも。"
+        },
+        "2": {
+          rank: ["みずがめ座", "うお座", "おひつじ座", "おうし座", "ふたご座"],
+          description: "2月生まれのあなたは、クリエイティブで独自の視点を持つタイプ。自由な発想で周りの人々にインスピレーションを与えることができます。",
+          goodAdvice: "今日は自分の直感を信じて行動すると、素晴らしいアイデアが浮かんでくるでしょう。"
+        },
+        // 他の月にも同様の構成で情報を追加
       };
 
-      const resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = `
-        <h2>${sign}の運勢</h2>
-        <p>${messages[sign] || '占いが見つかりませんでした。'}</p>`;
+      const selectedRanking = rankings[month] || {};
+      const rankList = selectedRanking.rank ? selectedRanking.rank.map((sign, index) => `<li>${index + 1}. ${sign}</li>`).join('') : '';
+
+      document.getElementById('result').innerHTML = `
+        <h2>${month}月生まれの占い</h2>
+        <p>${selectedRanking.description}</p>
+        <div class="ranking">
+          <h3>ランキング</h3>
+          <ul>${rankList}</ul>
+        </div>
+        <p>${selectedRanking.goodAdvice}</p>
+      `;
     }
   </script>
 </body>
