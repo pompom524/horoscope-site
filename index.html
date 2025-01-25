@@ -145,7 +145,7 @@
       };
 
       const selectedRanking = rankings[month] || {};
-      const rankList = randomZodiacs.map((sign) => `<li>${sign}</li>`).join('');
+      const rankList = randomZodiacs.map((sign, index) => `<li>順位 ${index + 1}: ${sign}</li>`).join(''); // 順位を付ける
 
       document.getElementById('result').innerHTML = `
         <h2>${month}月生まれの占い</h2>
